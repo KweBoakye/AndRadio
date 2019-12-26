@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':domain')
+    implementation project(':network')
+    implementation project(':viewmodels')
+    implementation DependencyInjection.dagger
+    kapt DependencyInjection.dagger_kapt
+
+    implementation KotlinLibs.kotlin_stdlib
+    testImplementation Testing.junit
+    androidTestImplementation Testing.junit_android
+    androidTestImplementation Testing.espresso_core
+
+    implementation AndroidLibs.lifecycle_extensions
+    implementation AndroidLibs.lifecycle_common
+
+    implementation Libs.coil
+}
