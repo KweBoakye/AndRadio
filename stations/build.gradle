@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android{
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':domain')
+    implementation project(':core')
+    implementation project(':dependencyinjection')
+    implementation project(':viewmodels')
+
+    implementation KotlinLibs.kotlin_stdlib
+    implementation AndroidLibs.android_appcompat
+    implementation AndroidLibs.android_ktx
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation Testing.junit
+    androidTestImplementation Testing.junit_android
+    androidTestImplementation Testing.espresso_core
+    implementation DependencyInjection.dagger
+
+    implementation KotlinLibs.coroutines_core
+    implementation KotlinLibs.coroutines_android
+
+    implementation AndroidLibs.lifecycle_extensions
+    implementation AndroidLibs.lifecycle_common
+
+    implementation UiLibs.material_design
+
+
+    kapt DependencyInjection.dagger_kapt
+    implementation AndroidLibs.constraint_layout
+    implementation AndroidLibs.recyclerview
+
+    implementation LoggingLibs.timber
+
+    implementation Libs.coil
+}
