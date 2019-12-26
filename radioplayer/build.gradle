@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation KotlinLibs.kotlin_stdlib
+    implementation AndroidLibs.android_appcompat
+    implementation AndroidLibs.android_ktx
+    testImplementation Testing.junit
+    androidTestImplementation Testing.junit_android
+    androidTestImplementation Testing.espresso_core
+
+    implementation Libs.exoplayer
+
+    implementation AndroidLibs.constraint_layout
+
+
+}
