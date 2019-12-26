@@ -1,19 +1,52 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    defaultConfig {
+
+
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            multiDexKeepFile file('multidex-config.txt')
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
 
 
 
 dependencies {
+    implementation project(':navigation')
+    implementation project(':domain')
+    implementation project(':core')
+    implementation project(':radioplayer')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Libs.kotlin_stdlib
-    implementation Libs.android_appcompat
-    implementation Libs.android_ktx
-    implementation Libs.constraint_layout
-    testImplementation Libs.junit
-    androidTestImplementation Libs.junit_android
-    androidTestImplementation Libs.espresso_core
+    implementation Libs.multidex
+    implementation KotlinLibs.kotlin_stdlib
+    implementation AndroidLibs.android_appcompat
+    implementation AndroidLibs.android_ktx
+    implementation AndroidLibs.constraint_layout
+    implementation DependencyInjection.dagger
+    kapt DependencyInjection.dagger_kapt
+
+    implementation LoggingLibs.timber
+
+    implementation UiLibs.material_design
+
+    implementation Navigation.navigation_fragment
+    implementation Navigation.navigation_ktx
+
+    testImplementation Testing.junit
+    androidTestImplementation Testing.junit_android
+    androidTestImplementation Testing.espresso_core
 
 }
