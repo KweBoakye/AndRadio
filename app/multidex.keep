@@ -1,0 +1,7 @@
+androidx/databinding/DataBinderMapperImpl.class
+Landroidx/databinding/DataBinderMapperImpl.class
+com/kweku/core/databinding/NowPlayingLayoutBindingclass
+com/kweku/core/MainActivity.class
+-keep public class * extends android.databinding.ViewDataBinding {
+ *;
+}
