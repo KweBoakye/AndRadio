@@ -1,0 +1,15 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':stations')
+    implementation project (':core')
+    implementation KotlinLibs.kotlin_stdlib
+
+
+    implementation Navigation.navigation_fragment
+    implementation Navigation.navigation_ktx
+}
