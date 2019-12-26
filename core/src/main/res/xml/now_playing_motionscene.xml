@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
+    >
+
+    <Transition
+        motion:constraintSetStart="@id/collapsed"
+        motion:constraintSetEnd="@id/expanded"
+        motion:duration="1000">
+        <OnSwipe
+            motion:touchAnchorId="@id/now_playing_bar"
+            motion:dragDirection="dragUp"
+            motion:touchAnchorSide="top"/>
+
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/collapsed">
+
+
+        <Constraint
+        android:id="@+id/now_playing_bar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        motion:layout_constraintBottom_toBottomOf="parent"
+        motion:layout_constraintTop_toTopOf="parent"
+        motion:layout_constraintStart_toStartOf="parent"
+        motion:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+      <Constraint
+          android:id="@+id/station_icon"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          motion:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
+          motion:layout_constraintTop_toTopOf="@id/now_playing_bar"
+          motion:layout_constraintStart_toStartOf="@id/now_playing_bar"
+          />
+
+        <Constraint
+            android:id="@+id/station_name"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="103dp"
+            motion:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/station_icon"
+            motion:layout_constraintTop_toTopOf="@id/now_playing_bar"/>
+
+        <Constraint
+            android:id="@+id/exo_play"
+            android:layout_width="@dimen/exo_media_button_width"
+            android:layout_height="@dimen/exo_media_button_height"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="28dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/play_button"
+            motion:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
+            motion:layout_constraintEnd_toEndOf="@id/now_playing_bar"
+            motion:layout_constraintTop_toTopOf="@id/now_playing_bar"/>
+
+        <Constraint
+            android:id="@+id/player_buffering"
+            android:layout_width="@dimen/exo_media_button_width"
+            android:layout_height="@dimen/exo_media_button_height"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="28dp"
+            motion:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
+            motion:layout_constraintEnd_toEndOf="@id/now_playing_bar"
+            motion:layout_constraintTop_toTopOf="@id/now_playing_bar" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/expanded">
+
+        <Constraint
+            android:id="@+id/now_playing_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            />
+
+        <Constraint
+            android:id="@+id/station_name"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            motion:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="@id/now_playing_bar"
+            />
+
+        <Constraint
+            android:id="@+id/station_icon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="48dp"
+            motion:layout_constraintBottom_toTopOf="@id/exo_play"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/now_playing_bar" />
+
+        <Constraint
+            android:id="@+id/exo_play"
+            android:layout_width="142dp"
+            android:layout_height="104dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="48dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/station_icon" />
+
+
+        <Constraint
+            android:id="@+id/player_buffering"
+            android:layout_width="142dp"
+            android:layout_height="104dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="48dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/station_icon"/>
+
+    </ConstraintSet>
+
+
+
+
+
+
+
+</MotionScene>

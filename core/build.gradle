@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project (':domain')
+    implementation project (':viewmodels')
+    implementation project (':dependencyinjection')
+    implementation project (':radioplayer')
+
+
+    implementation AndroidLibs.android_appcompat
+    implementation AndroidLibs.android_ktx
+
+    implementation Libs.exoplayer
+
+    implementation AndroidLibs.constraint_layout
+
+    implementation Libs.multidex
+
+    implementation KotlinLibs.coroutines_core
+
+    implementation DependencyInjection.dagger
+    kapt DependencyInjection.dagger_kapt
+
+    implementation LoggingLibs.timber
+
+    testImplementation Testing.junit
+    androidTestImplementation Testing.junit_android
+    androidTestImplementation Testing.espresso_core
+
+    implementation UiLibs.material_design
+
+    implementation Libs.coil
+
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Core</string>
+    <string name="play_button">Play Button</string>
+    <string name="station_icon_description">Icon of currently playing Station</string>
+</resources>
