@@ -1,2 +1,5 @@
-include ':app', ':network', ':buildSrc'
+include ':app', ':stations', ':navigation', ':dependencyinjection', ':core', ':viewmodels', ':radioplayer'
+include ':network'
+include ':buildSrc'
+include':domain'
 rootProject.name='AndRadio'

@@ -1,18 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+
 buildscript {
+    ext.kotlin_version = '1.3.61'
+
 
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
-        classpath Libs.gradle_android
-        classpath Libs.kotlin_gradle_plugin
-        classpath Libs.gradle_versions_plugin
+        classpath Plugins.gradle_android
+        classpath Plugins.kotlin_gradle_plugin
+        classpath Plugins.gradle_versions_plugin
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -20,7 +24,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
@@ -30,33 +34,46 @@ task clean(type: Delete) {
 
 subprojects {
     afterEvaluate { ->
-        if (project.hasProperty('android')){
+        if (project.hasProperty('android')) {
             android {
                 apply plugin: "com.github.ben-manes.versions"
+                apply plugin: 'kotlin-kapt'
                 compileSdkVersion Config.compileSdk
                 defaultConfig {
-                    applicationId "com.kweku.andradio"
+
                     minSdkVersion Config.minSdk
                     targetSdkVersion Config.targetSdk
-                    versionCode 1
-                    versionName "1.0"
-                    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+                    testInstrumentationRunner Testing.Android_JUnit_Runner
                 }
-                buildTypes {
-                    release {
-                        minifyEnabled false
-                        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-                    }
-                }
+
 
                 compileOptions {
                     sourceCompatibility Config.javaVersion
                     targetCompatibility Config.javaVersion
                 }
+
+                dataBinding {
+                    enabled =  true
+                }
+
+                kotlinOptions {
+                    jvmTarget = "1.8"
+                }
+
+
+
+                packagingOptions {
+                    exclude 'META-INF/metadata.kotlin_module'
+                    exclude 'META-INF/metadata.jvm.kotlin_module'
+                }
             }
-        }
-        else{
+        } else {
             apply plugin: "com.github.ben-manes.versions"
+
+
         }
+
     }
 }
+
+
