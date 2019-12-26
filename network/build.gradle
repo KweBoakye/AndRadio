@@ -1,15 +1,25 @@
 apply plugin: 'java-library'
 apply plugin : 'kotlin'
+apply plugin: 'kotlin-kapt'
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Libs.coroutines_core
-    implementation Libs.moshi
-    implementation Libs.moshi_kapt
-    implementation Libs.moshi_kotlin
-    implementation Libs.retrofit
-    implementation Libs.retrofit_moshi_converter
-    implementation Libs.kotlin_stdlib
+    implementation project(':domain')
+    implementation KotlinLibs.coroutines_core
+    implementation Networking.moshi
+    kapt Networking.moshi_kapt
+    implementation Networking.moshi_kotlin
+    implementation Networking.retrofit
+    implementation Networking.retrofit_moshi_converter
+
+    implementation KotlinLibs.kotlin_stdlib
+    implementation KotlinLibs.kotlin_reflect
+
+    implementation DependencyInjection.dagger
+    kapt DependencyInjection.dagger_kapt
+
+
 
 
 }
