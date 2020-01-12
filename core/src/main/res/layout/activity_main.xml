@@ -25,8 +25,17 @@
         app:navGraph="@navigation/nav_graph"
         android:layout_marginBottom="80dp"/>
 
-    <include layout="@layout/now_playing_layout"
-        android:id="@+id/now_playing_layout"/>
+
+
+
+        <include
+            android:id="@+id/now_playing_layout"
+            layout="@layout/now_playing_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -35,108 +44,3 @@
 
 
 
-<!--
-<layout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-tools:context="com.kweku.core.MainActivity.MainActivity">
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph"
-        android:layout_marginBottom="80dp"/>
-
-    <View
-        android:id="@+id/now_playing_bar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline"
-        android:background="#CC000000"
-        />
-
-    <ImageView
-        android:id="@+id/station_icon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
-        app:layout_constraintStart_toStartOf="@id/now_playing_bar"
-        app:layout_constraintTop_toTopOf="@id/now_playing_bar"
-        android:contentDescription="@string/station_icon_description" />
-
-    <ImageButton
-        android:id="@+id/exo_play"
-        android:layout_width="@dimen/exo_media_button_width"
-        android:layout_height="@dimen/exo_media_button_height"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="28dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:contentDescription="@string/play_button"
-        app:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
-        app:layout_constraintEnd_toEndOf="@id/now_playing_bar"
-        app:layout_constraintTop_toTopOf="@id/now_playing_bar" />
-
-
-    <ProgressBar
-        android:id="@+id/player_buffering"
-        android:layout_width="@dimen/exo_media_button_width"
-        android:layout_height="@dimen/exo_media_button_height"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
-        app:layout_constraintEnd_toEndOf="@id/now_playing_bar"
-        app:layout_constraintTop_toTopOf="@id/now_playing_bar"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/station_name"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="103dp"
-        android:gravity="center"
-
-        android:textAlignment="gravity"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/station_icon"
-        app:layout_constraintTop_toTopOf="@id/now_playing_bar"
-        tools:text="TextView" />
-
-
-
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="80dp"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-</layout>-->

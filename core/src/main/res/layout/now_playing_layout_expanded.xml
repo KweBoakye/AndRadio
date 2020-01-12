@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.motion.widget.MotionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -6,6 +7,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     >
+
+
 
     <View
         android:id="@+id/now_playing_bar"
@@ -15,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#CC000000"
+
         />
 
 

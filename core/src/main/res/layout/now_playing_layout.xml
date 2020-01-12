@@ -6,83 +6,79 @@
 
         >
 
+
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/now_playing"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/bottom_sheet_behavior"
-        app:behavior_hideable= "false"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        app:behavior_hideable="false"
         app:behavior_peekHeight="80dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:layoutDescription="@xml/now_playing_motionscene"
         >
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <View
+            android:id="@+id/now_playing_bar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#000000" />
 
         <ImageView
             android:id="@+id/station_icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
-            app:layout_constraintStart_toStartOf="@id/now_playing_bar"
-            app:layout_constraintTop_toTopOf="@id/now_playing_bar"
-            android:contentDescription="@string/station_icon_description" />
 
-        <ImageButton
-            android:id="@+id/exo_play"
-            android:layout_width="@dimen/exo_media_button_width"
-            android:layout_height="@dimen/exo_media_button_height"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="28dp"
-            android:background="?android:attr/selectableItemBackground"
-            android:contentDescription="@string/play_button"
-            app:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
-            app:layout_constraintEnd_toEndOf="@id/now_playing_bar"
-            app:layout_constraintTop_toTopOf="@id/now_playing_bar" />
+            android:contentDescription="@string/station_icon_description"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+           />
+
+
 
 
         <ProgressBar
             android:id="@+id/player_buffering"
             android:layout_width="@dimen/exo_media_button_width"
             android:layout_height="@dimen/exo_media_button_height"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="28dp"
-            app:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
-            app:layout_constraintEnd_toEndOf="@id/now_playing_bar"
-            app:layout_constraintTop_toTopOf="@id/now_playing_bar"
-            android:visibility="gone"/>
+            android:visibility="gone"
+             />
+
+        <ImageButton
+            android:id="@+id/exo_play"
+            android:layout_width="@dimen/exo_media_button_width"
+            android:layout_height="@dimen/exo_media_button_height"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="@string/play_button"
+            android:src="@drawable/exo_controls_play"
+             />
 
         <TextView
             android:id="@+id/station_name"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="103dp"
             android:gravity="center"
-
             android:textAlignment="gravity"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/station_icon"
-            app:layout_constraintTop_toTopOf="@id/now_playing_bar"
             tools:text="TextView" />
 
 
 
 
 
-        <View
-            android:id="@+id/now_playing_bar"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="#CC000000"
-            />
 
 
     </androidx.constraintlayout.motion.widget.MotionLayout>

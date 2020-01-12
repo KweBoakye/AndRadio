@@ -17,7 +17,7 @@ class AllStationsViewModelProviderFactory @Inject constructor(private val allSta
         val allStationsViewModel: AllStationsViewModel
 
         if (modelClass == AllStationsViewModel::class.java) {
-            allStationsViewModel = allStationsOutputProvider.get()
+            allStationsViewModel = allStationsOutputProvider.get() as AllStationsViewModel
         }
         else {
             throw RuntimeException("unsupported view model class: $modelClass ")

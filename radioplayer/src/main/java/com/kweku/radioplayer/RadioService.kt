@@ -11,6 +11,7 @@ import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import timber.log.Timber
 
 
 class RadioService(): Service() {
@@ -29,16 +30,19 @@ class RadioService(): Service() {
 
     override fun onCreate() {
         super.onCreate()
-        player =  ExoPlayerFactory.newSimpleInstance(this)
+        player =  SimpleExoPlayer.Builder(this).build()
 
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
+            Timber.i("startCommand")
         intent?.let {
+
             when (it.getIntExtra(PLAY_PAUSE_ACTION, -1)) {
-                0 -> player.playWhenReady = !player.playWhenReady
+
+                0 -> {player.playWhenReady = !player.playWhenReady}
             }
+            if (player.playWhenReady)player.seekTo(0L)
         }
             return super.onStartCommand(intent, flags, startId)
         }
@@ -64,19 +68,13 @@ class RadioService(): Service() {
     }
 
 
-
-
     inner class RadioServiceBinder: Binder(){
         fun getPlayerInstance() = player
         fun getService(): RadioService = this@RadioService
         fun startPlayback(url: String) = this@RadioService.startPlayback(url)
     }
 
-    fun initializePlayer(url: String){
-        player = ExoPlayerFactory.newSimpleInstance(this)
-        // playerView.player = player
-       startPlayback(url)
-    }
+
 
     fun startPlayback(url:String){
         val audioUri: Uri = Uri.parse(url)

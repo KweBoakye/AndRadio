@@ -17,5 +17,6 @@ interface MainActivityViewClassInterface {
     fun setPlaybackControlsToPlaying()
     fun setPlaybackControlsToBuffering()
     fun setPlaybackControlsToStopped()
+    fun setPlayButtonOnClickListener()
 
 }

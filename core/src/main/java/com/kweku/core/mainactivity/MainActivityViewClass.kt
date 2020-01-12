@@ -1,61 +1,79 @@
 package com.kweku.core.mainactivity
 
+
+
 import android.content.Context
 import android.os.Bundle
+import android.renderscript.RenderScript
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.FrameLayout
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.MotionLayout.TransitionListener
+import androidx.fragment.app.FragmentContainerView
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
 import com.kweku.andradio.domain.models.PlayableStation
 import com.kweku.andradio.domain.models.Station
 import com.kweku.core.R
+import com.kweku.core.RenderScriptBlurProcessor
 import com.kweku.core.databinding.ActivityMainBinding
 import com.kweku.core.databinding.NowPlayingLayoutBinding
+import timber.log.Timber
 
 class MainActivityViewClass(
-    val mainActivity: MainActivity, val playPauseAction: Unit
-) : MainActivityViewClassInterface, TransitionListener {
+    val mainActivity: MainActivity, val playPauseAction: () -> Unit
+) : MainActivityViewClassInterface {
 
     private val binding: ActivityMainBinding = ActivityMainBinding
         .inflate(LayoutInflater.from(mainActivity))
     private val root: View = binding.root
+    private val fragmentContainerView: FragmentContainerView = binding.navHostFragment
     val nowPlayingLayoutBinding: NowPlayingLayoutBinding = binding.nowPlayingLayout
     val playButton: ImageButton = nowPlayingLayoutBinding.exoPlay
     val playerBuffering: ProgressBar = nowPlayingLayoutBinding.playerBuffering
     val stationName: TextView = nowPlayingLayoutBinding.stationName
     val stationImage: ImageView = nowPlayingLayoutBinding.stationIcon
+    val renderScriptBlurProcessor: RenderScriptBlurProcessor = RenderScriptBlurProcessor(
+        RenderScript.create(mainActivity))
     val nowPlayingLayout: MotionLayout =
-        nowPlayingLayoutBinding.nowPlaying.also { nowPlayingLayout ->
+        nowPlayingLayoutBinding.nowPlaying/*.also { nowPlayingLayout ->
             nowPlayingLayout.setTransitionListener(this)
-        }
-    val bottomSheetBehavior: BottomSheetBehavior<MotionLayout> =
-        BottomSheetBehavior.from(nowPlayingLayout)
+        }*/
+
+
+    val bottomSheetBehavior: BottomSheetBehavior<MotionLayout> = BottomSheetBehavior.from(nowPlayingLayout)
 
 
     override fun getRootView(): View = this.root
 
-    private fun setPlayButtonOnClickListener() {
-        playButton.setOnClickListener {
-            playPauseAction
-        }
+    init {
+
+        setBottomSheetBehaviourListener()
     }
 
-    private fun setBottomSheetBehaviourListener(savedInstanceState: Bundle?) {
+     override fun setPlayButtonOnClickListener() {
+        playButton.setOnClickListener {
+            playPauseAction.invoke()
+            Timber.i("clicked")
+        }
+
+    }
+
+    private fun setBottomSheetBehaviourListener() {
         with(bottomSheetBehavior) {
-            if (savedInstanceState == null) {
-                state = STATE_HIDDEN
+
+
                 addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                     override fun onSlide(bottomSheet: View, slideOffset: Float) {
                         /*use coerceIn as we are only interested in values between 0 and 1 which is
                         represent collapse and expanded states*/
-                        nowPlayingLayout.progress = 1 - slideOffset.coerceIn(0F, 1F)
+                        nowPlayingLayout.progress =  slideOffset.coerceIn(0F, 1F)
                     }
 
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -66,7 +84,7 @@ class MainActivityViewClass(
 
             }
         }
-    }
+
 
     override fun setStationName(playableStation: PlayableStation) {
         stationName.text = playableStation.stationName
@@ -93,21 +111,21 @@ class MainActivityViewClass(
         playerBuffering.visibility = View.GONE
     }
 
-    override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+   /* override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+
     }
 
     override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+
+    }*/
 
 
 }

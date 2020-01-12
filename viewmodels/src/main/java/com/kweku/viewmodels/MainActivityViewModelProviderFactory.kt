@@ -19,7 +19,7 @@ class MainActivityViewModelProviderFactory
         val mainActivityViewModel: MainActivityViewModel
 
         if (modelClass == MainActivityViewModel::class.java) {
-            mainActivityViewModel = playOutputProvider.get()
+            mainActivityViewModel = playOutputProvider.get() as MainActivityViewModel
         }
         else {
             throw RuntimeException("unsupported view model class: $modelClass ")

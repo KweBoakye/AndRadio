@@ -24,6 +24,7 @@ class AllStationsViewModel @Inject constructor():ViewModel(), AllStationsOutput 
 
     override suspend fun updateAllStationsLiveData(stations: List<Station>)= withContext(Dispatchers.Main){
         allStationsLiveData.value = stations
+        Timber.i("${allStationsLiveData.value}")
         Timber.i("${allStationsLiveData.hasActiveObservers()}")
     }
 

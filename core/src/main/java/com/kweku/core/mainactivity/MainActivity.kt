@@ -27,12 +27,12 @@ import com.kweku.dependencyinjection.MainComponent
 import com.kweku.radioplayer.RadioService
 import com.kweku.viewmodels.MainActivityViewModel
 import com.kweku.viewmodels.MainActivityViewModelProviderFactory
+import timber.log.Timber
 import javax.inject.Provider
 
 class MainActivity : AppCompatActivity(), Player.EventListener {
 
     lateinit var playableUrlIntent:Intent
-    lateinit var  binding: ActivityMainBinding
     lateinit var  player: SimpleExoPlayer
     private var isRadioServiceBound: Boolean = false
     lateinit var binder: RadioService.RadioServiceBinder
@@ -69,11 +69,10 @@ class MainActivity : AppCompatActivity(), Player.EventListener {
 
         mainActivityViewModel = this.getViewModel(mainActivityViewModelProviderFactory)
 
-        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
-        val root: View = binding.root
+
 
          mainActivityViewClassInterface =
-            MainActivityViewClass(this, playPauseAction())
+            MainActivityViewClass(this, ::playPauseAction)
 
         setContentView(mainActivityViewClassInterface.getRootView())
             }
@@ -81,7 +80,7 @@ class MainActivity : AppCompatActivity(), Player.EventListener {
     override fun onStart() {
         super.onStart()
         playableUrlIntent = Intent(applicationContext, RadioService::class.java)
-
+        mainActivityViewClassInterface.setPlayButtonOnClickListener()
         bindService(playableUrlIntent, radioServiceonnection, Context.BIND_AUTO_CREATE)
 
         mainActivityViewModel.observePlayableStationLiveData(this, this::playRadioStation)
@@ -95,9 +94,11 @@ class MainActivity : AppCompatActivity(), Player.EventListener {
         isRadioServiceBound = false
     }
 
-    private fun playPauseAction(){
+    fun playPauseAction(){
+        Timber.i("playPause")
         startService(Intent(this, RadioService::class.java).apply {
-            putExtra(RadioService.PLAY_PAUSE_ACTION,0)
+            Timber.i("Intent")
+           this.putExtra(RadioService.PLAY_PAUSE_ACTION,0)
         })
     }
 
