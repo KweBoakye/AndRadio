@@ -1,8 +1,8 @@
 package com.kweku.core.mainactivity
 
+
+import android.graphics.drawable.Drawable
 import android.view.View
-import com.kweku.andradio.domain.models.PlayableStation
-import com.kweku.andradio.domain.models.Station
 
 interface MainActivityViewClassInterface {
 
@@ -12,8 +12,8 @@ interface MainActivityViewClassInterface {
 
 
     fun getRootView(): View
-    fun setStationName(playableStation: PlayableStation)
-    fun setStationImage(station: Station)
+    fun setStationName(stationNameString: String)
+    fun setStationImage(drawable: Drawable)
     fun setPlaybackControlsToPlaying()
     fun setPlaybackControlsToBuffering()
     fun setPlaybackControlsToStopped()

@@ -10,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.Coil
+import coil.ImageLoader
 import coil.api.get
 import coil.api.load
 import com.kweku.andradio.domain.models.Station
@@ -54,6 +55,7 @@ private lateinit var binding: ViewAllStationsBinding
     ): AllStationsRecyclerViewHolder {
         binding = ViewAllStationsBinding.inflate(LayoutInflater.from(context), parent, false)
         val allStationsRecyclerViewHolder = AllStationsRecyclerViewHolder(binding.root)
+
 
         allStationsRecyclerViewHolder.stationNameTextView =  binding.stationNameTextView
         allStationsRecyclerViewHolder.stationCountryTextView = binding.stationCountry

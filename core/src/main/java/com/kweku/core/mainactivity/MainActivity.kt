@@ -1,57 +1,67 @@
 package com.kweku.core.mainactivity
 
+import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
-import coil.api.load
+import androidx.core.content.ContextCompat
+import coil.ImageLoader
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.kweku.andradio.domain.PlayOutput
-import com.kweku.andradio.domain.models.PlayableStation
-import com.kweku.andradio.domain.models.Station
+import com.kweku.andradio.domain.models.StationClickCount
+
 import com.kweku.core.App
-import com.kweku.core.R
-import com.kweku.core.databinding.ActivityMainBinding
 import com.kweku.core.getViewModel
 import com.kweku.dependencyinjection.MainComponent
 import com.kweku.radioplayer.RadioService
 import com.kweku.viewmodels.MainActivityViewModel
 import com.kweku.viewmodels.MainActivityViewModelProviderFactory
 import timber.log.Timber
-import javax.inject.Provider
 
 class MainActivity : AppCompatActivity(), Player.EventListener {
 
-    lateinit var playableUrlIntent:Intent
+    lateinit var radioPlayerIntent:Intent
+    lateinit var notificationIntent:Intent
     lateinit var  player: SimpleExoPlayer
     private var isRadioServiceBound: Boolean = false
     lateinit var binder: RadioService.RadioServiceBinder
-    lateinit var playOutput: Provider<PlayOutput>
+    private var stationPlayed = false
     lateinit var mainActivityViewClassInterface: MainActivityViewClassInterface
+
+
 
     private lateinit var mainActivityViewModelProviderFactory: MainActivityViewModelProviderFactory
 
     lateinit var mainActivityViewModel: MainActivityViewModel
 
-    private val radioServiceonnection:ServiceConnection = object: ServiceConnection {
+    lateinit var imageLoader: ImageLoader
+
+    private val radioServiceConnection:ServiceConnection = object: ServiceConnection {
             override fun onServiceDisconnected(name: ComponentName?) {
                 isRadioServiceBound = false
             }
 
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
                 if (service is RadioService.RadioServiceBinder){
-                    service.getPlayerInstance().addListener(this@MainActivity)
+                    service
+                        .getPlayerInstance()
+                        .addListener(this@MainActivity)
                     binder = service
+
+                    mainActivityViewModel.run {
+                        observeMediaSessionMetaData(this@MainActivity,
+                            binder::setStationAndMediaSessionMetaData)
+
+                        if (binder.serviceHasPreviouslyBeenUnbound() and stationPlayed){
+                            setStationNameLiveData(binder.getCurrentStationName())
+                            loadAndSetStationIconLiveData(binder.getCurrentStationIconUrl())
+                        }
+                    }
                 }
                 isRadioServiceBound = true
             }
@@ -61,55 +71,65 @@ class MainActivity : AppCompatActivity(), Player.EventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val mainComponent: MainComponent = (applicationContext as App)
-            .provideMainComponent()
-
-        mainActivityViewModelProviderFactory = mainComponent
-            .getMainAcivityViewModelProviderFactory()
+        val mainComponent: MainComponent = (applicationContext as App).provideMainComponent()
+        mainActivityViewModelProviderFactory = mainComponent.getMainAcivityViewModelProviderFactory()
+        imageLoader = mainComponent.getImageLoader()
 
         mainActivityViewModel = this.getViewModel(mainActivityViewModelProviderFactory)
-
-
 
          mainActivityViewClassInterface =
             MainActivityViewClass(this, ::playPauseAction)
 
+        radioPlayerIntent = Intent(applicationContext, RadioService::class.java)
+        val activityIntent = Intent(applicationContext, MainActivity::class.java)
+        notificationIntent = radioPlayerIntent.putExtra("activityIntent",activityIntent)
+
+        ContextCompat.startForegroundService(this, notificationIntent)
         setContentView(mainActivityViewClassInterface.getRootView())
             }
 
     override fun onStart() {
         super.onStart()
-        playableUrlIntent = Intent(applicationContext, RadioService::class.java)
-        mainActivityViewClassInterface.setPlayButtonOnClickListener()
-        bindService(playableUrlIntent, radioServiceonnection, Context.BIND_AUTO_CREATE)
 
-        mainActivityViewModel.observePlayableStationLiveData(this, this::playRadioStation)
-        mainActivityViewModel.observeStationLiveData(this, this::setStation)
+
+        mainActivityViewClassInterface.setPlayButtonOnClickListener()
+
+        bindService(radioPlayerIntent, radioServiceConnection, Context.BIND_AUTO_CREATE)
+
+        mainActivityViewModel.run {
+            observePlayableStationLiveData(this@MainActivity, ::playRadioStation)
+        observeStationNameLiveData(this@MainActivity, ::setStation)
+        observeStationIconLiveData(this@MainActivity, ::setStationIcon)
+        }
     }
 
     override fun onStop() {
         super.onStop()
-
-        unbindService(radioServiceonnection)
-        isRadioServiceBound = false
+        unbindService(radioServiceConnection)
     }
 
-    fun playPauseAction(){
+    private fun playPauseAction(){
         Timber.i("playPause")
-        startService(Intent(this, RadioService::class.java).apply {
-            Timber.i("Intent")
-           this.putExtra(RadioService.PLAY_PAUSE_ACTION,0)
-        })
+              binder.playPause()
     }
 
-    private fun playRadioStation(playableStation: PlayableStation){
-        mainActivityViewClassInterface.setStationName(playableStation)
-        binder.startPlayback(playableStation.playableUrl)
+    private fun playRadioStation(stationClickCount: StationClickCount){
+        binder.startPlayback(stationClickCount.playableUrl)
+        stationPlayed = true
     }
 
-    private fun setStation(station: Station){
-        mainActivityViewClassInterface.setStationImage(station)
+    private fun setStation(stationNameString: String){
+        mainActivityViewClassInterface.setStationName(stationNameString)
+        binder.setCurrentStationName(stationNameString)
     }
+
+    private fun setStationIcon(stationIconUrlString: String, stationIcon: Drawable){
+        mainActivityViewClassInterface.setStationImage(stationIcon)
+        binder.setCurrentStationIconUrl(stationIconUrlString)
+        binder.setStationAndMediaSessionMetaData(stationIconUrlString, stationIcon)
+    }
+
+
 
     override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
         with(mainActivityViewClassInterface) {

@@ -17,6 +17,7 @@ dependencies {
 
     implementation AndroidLibs.lifecycle_extensions
     implementation AndroidLibs.lifecycle_common
+    implementation AndroidLibs.viewmodel_scope
 
     implementation LoggingLibs.timber
     implementation AndroidLibs.viewmodel_savedstate
@@ -27,6 +28,9 @@ dependencies {
 
     implementation DependencyInjection.assisted_inject
     kapt DependencyInjection.assisted_inject_processer
+
+    implementation Libs.coil
+    implementation Libs.coil_svg
 
 
 

@@ -42,4 +42,5 @@ dependencies {
     implementation LoggingLibs.timber
 
     implementation Libs.coil
+    implementation Libs.coil_svg
 }

@@ -3,72 +3,79 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/StationViewConstrainLayout"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="100dp"
+        app:cardCornerRadius="8dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/StationIcon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/StationViewConstrainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
 
-        <TextView
-            android:id="@+id/stationNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/StationIcon"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="stationNameTextView" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/StationIcon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/station_language"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/station_country"
-            app:layout_constraintTop_toBottomOf="@id/stationNameTextView"
-            tools:text="station_language" />
+            <TextView
+                android:id="@+id/stationNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/StationIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="stationNameTextView" />
 
-        <TextView
-            android:id="@+id/station_bitrate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/station_language"
+            <TextView
+                android:id="@+id/station_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/station_country"
+                app:layout_constraintTop_toBottomOf="@id/stationNameTextView"
+                tools:text="station_language" />
 
-            app:layout_constraintTop_toBottomOf="@id/stationNameTextView"
-            tools:text="station_bitrate" />
+            <TextView
+                android:id="@+id/station_bitrate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/station_language"
 
-        <TextView
-            android:id="@+id/station_country"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@id/StationIcon"
-            app:layout_constraintTop_toBottomOf="@id/stationNameTextView"
-            tools:text="station_country" />
+                app:layout_constraintTop_toBottomOf="@id/stationNameTextView"
+                tools:text="station_bitrate" />
 
-        <TextView
-            android:id="@+id/station_tags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/StationIcon"
-            app:layout_constraintTop_toBottomOf="@id/station_country"
-            tools:text="station_tags" />
+            <TextView
+                android:id="@+id/station_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@id/StationIcon"
+                app:layout_constraintTop_toBottomOf="@id/stationNameTextView"
+                tools:text="station_country" />
+
+            <TextView
+                android:id="@+id/station_tags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                app:layout_constraintStart_toEndOf="@+id/StationIcon"
+                app:layout_constraintTop_toBottomOf="@id/station_country"
+                tools:text="station_tags" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

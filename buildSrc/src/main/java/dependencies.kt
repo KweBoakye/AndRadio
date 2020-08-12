@@ -4,8 +4,8 @@ import org.gradle.api.JavaVersion
 
 object Config{
     val minSdk = 19
-    val compileSdk = 28
-    val targetSdk = 28
+    val compileSdk = 29
+    val targetSdk = 29
     val javaVersion = JavaVersion.VERSION_1_8
 
 }
@@ -17,12 +17,12 @@ object Versions{
 
     const val androidx_media_version = "1.1.0"
     const val androidx_media2_version = "1.0.1"
-    const val exoplayer_version = "2.11.0"
+    const val exoplayer_version = "2.11.1"
     const val nav_version = "2.1.0"
-    const val retrofit2_version ="2.7.0"
+    const val retrofit2_version ="2.7.1"
     const val moshi_version = "1.9.2"
     const val coroutines_version = "1.3.3"
-    const val android_ktx_version = "1.1.0"
+    const val android_ktx_version = "1.2.0"
     const val android_appcompat_version = "1.1.0"
     const val constraint_layout_version = "2.0.0-beta4"
     const val junit_version = "4.12"
@@ -31,9 +31,9 @@ object Versions{
     const val dagger_version = "2.25.2"
     const val coroutine_test = "1.3.2"
     const val recyclerview_version = "1.1.0"
-    const val lifecycle_version = "2.2.0-rc03"
+    const val lifecycle_version = "2.2.0"
     const val material_design_version = "1.2.0-alpha02"
-    const val coil_version = "0.8.0"
+    const val coil_version = "0.9.2"
     const val multidex_version = "2.0.1"
     const val viewmodel_savedstate_version = "1.0.0-rc03"
     const val assisted_inject_version = "0.5.2"
@@ -73,6 +73,7 @@ object AndroidLibs{
     val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview_version}"
     val lifecycle_extensions=  "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle_version}"
     val lifecycle_common ="androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle_version}"
+    val viewmodel_scope = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle_version}"
     val viewmodel_savedstate = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.viewmodel_savedstate_version}"
 
 }
@@ -96,6 +97,7 @@ object Libs {
     val androidx_media = "androidx.media:media:${Versions.androidx_media_version}"
     val androidx_media2_session ="androidx.media2:media2-session:${Versions.androidx_media2_version}"
     val coil = "io.coil-kt:coil:${Versions.coil_version}"
+    val coil_svg = "io.coil-kt:coil-svg:${Versions.coil_version}"
     val multidex = "androidx.multidex:multidex:${Versions.multidex_version}"
 }
 

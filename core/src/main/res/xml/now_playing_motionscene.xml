@@ -21,12 +21,18 @@
 
     <ConstraintSet android:id="@+id/collapsed">
 
-        <Constraint
-            android:id="@+id/now_playing">
-            <CustomAttribute
-                motion:attributeName="backgroundColor"
-                motion:customColorValue="#000000"/>
-        </Constraint>
+
+
+    <Constraint
+        android:id="@+id/spaceWidget"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
+       motion:layout_constraintTop_toTopOf="parent"
+       motion:layout_constraintEnd_toEndOf="parent"
+       motion:layout_constraintStart_toStartOf="parent"
+       motion:layout_constraintBottom_toBottomOf="parent"
+        />
 
 
         <Constraint
@@ -38,7 +44,12 @@
         motion:layout_constraintEnd_toEndOf="parent"
        />
 
-      <Constraint
+
+
+
+
+
+        <Constraint
           android:id="@+id/station_icon"
           android:layout_width="60dp"
           android:layout_height="60dp"
@@ -48,6 +59,7 @@
           motion:layout_constraintBottom_toBottomOf="@id/now_playing_bar"
           motion:layout_constraintTop_toTopOf="@id/now_playing_bar"
           motion:layout_constraintStart_toStartOf="@id/now_playing_bar"
+
           />
 
         <Constraint
@@ -93,12 +105,18 @@
     <ConstraintSet android:id="@+id/expanded">
 
 
- <Constraint
-     android:id="@+id/now_playing">
-     <CustomAttribute
-         motion:attributeName="backgroundColor"
-         motion:customColorValue="#000000"/>
- </Constraint>
+
+        <Constraint
+            android:id="@+id/spaceWidget"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="1dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            />
 
 
         <Constraint
@@ -108,7 +126,12 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
+
             />
+
+
+
+
 
         <Constraint
             android:id="@+id/station_name"
@@ -156,6 +179,8 @@
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/station_icon"
             motion:visibilityMode="ignore"/>
+
+
 
         <Constraint
             android:id="@+id/exo_play"

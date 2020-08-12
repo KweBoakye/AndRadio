@@ -1,26 +1,26 @@
 package com.kweku.andradio.mappers
 
-import com.kweku.andradio.domain.models.PlayableStation
+import com.kweku.andradio.domain.models.StationClickCount
 import com.kweku.andradio.domain.repository.ModelMapper
-import com.kweku.andradio.models.PlayableStationEntity
+import com.kweku.andradio.models.StationClickCountEntity
 
-class PlayableStationMapper:ModelMapper<PlayableStation, PlayableStationEntity> {
+class PlayableStationMapper:ModelMapper<StationClickCount, StationClickCountEntity> {
 
-    override fun fromEntity(from: PlayableStationEntity): PlayableStation {
-        return PlayableStation(
+    override fun fromEntity(from: StationClickCountEntity): StationClickCount {
+        return StationClickCount(
             from.statusOk,
             from.message,
-            from.stationID,
+            from.stationUuid,
             from.stationName,
             from.playableUrl
         )
     }
 
-    override fun toEntity(from: PlayableStation): PlayableStationEntity {
-        return PlayableStationEntity(
+    override fun toEntity(from: StationClickCount): StationClickCountEntity {
+        return StationClickCountEntity(
             from.statusOk,
             from.message,
-            from.stationID,
+            from.stationUuid,
             from.stationName,
             from.playableUrl
         )

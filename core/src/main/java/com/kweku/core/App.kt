@@ -3,8 +3,9 @@ package com.kweku.core
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import coil.Coil
+
 import coil.ImageLoader
+import coil.util.CoilUtils
 import com.kweku.dependencyinjection.DaggerMainComponent
 import com.kweku.dependencyinjection.MainComponent
 import timber.log.Timber
@@ -32,6 +33,7 @@ class App:  Application() {
             .context(this)
                 .build()
 
-        Coil.setDefaultImageLoader(mainComponent.getImageLoader())
+
+
     }
 }

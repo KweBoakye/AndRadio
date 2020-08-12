@@ -25,6 +25,7 @@ dependencies {
     implementation Libs.multidex
 
     implementation KotlinLibs.coroutines_core
+    implementation KotlinLibs.kotlin_stdlib
 
     implementation DependencyInjection.dagger
     kapt DependencyInjection.dagger_kapt
@@ -38,5 +39,6 @@ dependencies {
     implementation UiLibs.material_design
 
     implementation Libs.coil
+    implementation Libs.coil_svg
 
 }

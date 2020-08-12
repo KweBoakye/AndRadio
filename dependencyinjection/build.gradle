@@ -21,4 +21,5 @@ dependencies {
     implementation AndroidLibs.lifecycle_common
 
     implementation Libs.coil
+    implementation Libs.coil_svg
 }

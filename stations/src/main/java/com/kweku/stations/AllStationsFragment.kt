@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import androidx.lifecycle.ViewModelProvider
+import coil.ImageLoader
 
 import com.kweku.andradio.domain.interactors.GetStationsInteractorInterface
 import com.kweku.andradio.domain.models.Station
@@ -34,6 +35,8 @@ class AllStationsFragment : Fragment() {
     lateinit var allStationsViewModelProviderFactory: AllStationsViewModelProviderFactory
 
     lateinit var allStationsViewModel: AllStationsViewModel
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

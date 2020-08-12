@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.ImageLoader
 import com.kweku.andradio.domain.models.Station
 import com.kweku.stations.databinding.FragmentAllStationsBinding
 import com.kweku.stations.AllStationsViewClassInterface.AllStationsViewClassListener
@@ -28,8 +29,13 @@ class AllStationsViewClass(private val layoutInflater: LayoutInflater, private v
     }
 
     private fun initRecyclerview(){
-        allStationsRecyclerview.layoutManager = allStationsLayoutManager
-        allStationsRecyclerview.adapter = allStationsRecyclerAdapter
+
+        allStationsRecyclerview.apply {
+            layoutManager = allStationsLayoutManager
+            adapter = allStationsRecyclerAdapter
+            addItemDecoration(SpaceItemDecoration(8))
+        }
+
     }
 
     override fun setRecyclerData(stations :List<Station>){

@@ -2,6 +2,7 @@ androidx/databinding/DataBinderMapperImpl.class
 Landroidx/databinding/DataBinderMapperImpl.class
 com/kweku/core/databinding/NowPlayingLayoutBindingclass
 com/kweku/core/MainActivity.class
+com/kweku/core/mainactivity/CustomBottomSheetBehaviour.kt
 -keep public class * extends android.databinding.ViewDataBinding {
  *;
 }
